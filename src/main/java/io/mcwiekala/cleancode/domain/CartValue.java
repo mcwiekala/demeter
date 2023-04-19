@@ -14,20 +14,13 @@ class CartValue {
 
     private Price price;
 
-    CartValue(Currency currency, List<Price> prices) {
-        this.price = calculateCartValue(currency, prices);
+    CartValue(Currency currency, List<Price> productPrices) {
+        this.price = calculateCartValue(currency, productPrices);
     }
 
-    private Price calculateCartValue(Currency currency, List<Price> prices) {
-        validatePrices(currency, prices);
-        return calculateTotalPrice(currency, prices);
-    }
-
-    private static Price calculateTotalPrice(Currency currency, List<Price> prices) {
-        Price zeroValue = new Price(currency, BigDecimal.ZERO);
-        Price totalPrice = prices.stream()
-            .reduce(zeroValue, Price::addPrice);
-        return totalPrice;
+    private Price calculateCartValue(Currency currency, List<Price> productPrices) {
+        validatePrices(currency, productPrices);
+        return calculateTotalPrice(currency, productPrices);
     }
 
     private static void validatePrices(Currency currency, List<Price> prices) {
@@ -36,6 +29,13 @@ class CartValue {
         if (pricesInDifferentCurrencies) {
             throw new IllegalStateException("All product in cart must have same currency");
         }
+    }
+
+    private static Price calculateTotalPrice(Currency currency, List<Price> prices) {
+        Price zeroValue = new Price(currency, BigDecimal.ZERO);
+        Price totalPrice = prices.stream()
+            .reduce(zeroValue, Price::addPrice);
+        return totalPrice;
     }
 
 }
