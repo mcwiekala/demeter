@@ -17,4 +17,11 @@ class Price {
         USD, EUR, GBP, CHF
     }
 
+    Price addPrice(Price priceToAdd) {
+        if (currency != priceToAdd.getCurrency()) {
+            throw new IllegalStateException("Cannot add prices with different Currencies");
+        }
+        return new Price(currency, amount.add(priceToAdd.getAmount()));
+    }
+
 }
