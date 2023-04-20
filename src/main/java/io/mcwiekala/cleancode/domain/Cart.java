@@ -13,7 +13,7 @@ class Cart {
 
     private List<Product> products;
 
-    Price calculateValue(Currency currency){
+    Price calculateTotalPrice(Currency currency){
         List<Price> prices = getAllProductPricesByCurrency(currency);
         CartValue cartValue = new CartValue(currency, prices);
         return cartValue.getPrice();

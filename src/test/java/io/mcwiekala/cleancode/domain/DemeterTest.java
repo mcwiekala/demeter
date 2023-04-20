@@ -21,7 +21,7 @@ class DemeterTest {
         Cart cart = new Cart(products);
 
         // when
-        Price cartValue = cart.calculateValue(Currency.USD);
+        Price cartValue = cart.calculateTotalPrice(Currency.USD);
 
         // then
         assertThat(cartValue.getAmount()).isEqualTo(BigDecimal.valueOf(1900));

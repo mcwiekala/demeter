@@ -15,7 +15,7 @@ class User {
     private Cart cart;
 
     public void order() {
-        Price price = cart.calculateValue(Currency.USD);
+        Price totalPrice = cart.calculateTotalPrice(Currency.USD);
         // ... logic related to order
     }
 
